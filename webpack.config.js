@@ -1,8 +1,11 @@
 const webpack = require('webpack');
+const path = require('path');
 module.exports = {
-    entry: './runoob1.js',
+    // entry: __dirname + '/src/index.js',
+    entry: './src/index.js',
     output: {
-        path: __dirname,
+        // path: __dirname + '/dist',
+        path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
     },
     module: {

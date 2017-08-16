@@ -1,4 +1,4 @@
-# webpack-demo
+# 从0开始配置webpack
 webpack-demo
 ##### 1,安装 Webpack
 
