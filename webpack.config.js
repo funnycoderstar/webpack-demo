@@ -2,7 +2,7 @@ const webpack = require('webpack');
 // const path = require('path');
 module.exports = {
     devtool: 'eval-source-map',
-    entry: __dirname + '/src/index.js',
+    entry: __dirname + '/src/main.js',
     // entry: './src/index.js',
     output: {
         path: __dirname + '/dist',
@@ -14,10 +14,26 @@ module.exports = {
         historyApiFallback: true,//不跳转
         port: '2000',
         inline: true//实时刷新
-    } 
+    },
     module: {
-        loaders: [
-            { test: /.\css$/, loader: 'style-loader!css-loader'}
+        rules: [
+            // { test: /.\css$/, loader: 'style-loader!css-loader'},
+            {
+                test: /(\.jsx|\.js)$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            'es2015', 'react'
+                        ]
+                    }
+                },
+                exclude: /node_modules/,
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            }
         ]
     },
     plugins: [

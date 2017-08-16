@@ -1,4 +1,4 @@
-# 从0开始配置webpack
+# 从0开始配置webpack,[参考](http://www.jianshu.com/p/42e11515c10f)
 webpack-demo
 ##### 1,安装 Webpack
 
@@ -57,3 +57,40 @@ npm install webpack-dev-server -g
 # 运行
 webpack-dev-server --process --colors
 ```
+
+##### 1,从0开始配置webpack,使用react项目作为测试用例
+- 使用path和不适用path的路径配置有什么不同?
+- 使用npm scripts代替webpack(非全局安装需使用node_modules/.bin/webpack)? 
+- 
+##### 2,生成source Maps
+- source Maps 解决了什么问题? 使调试更容易
+
+##### 3, 构建本地服务器
+```bash
+npm install --save-dev webpack-dev-server
+```
+##### 4,loader
+作用
+- 分析转化less和scss为css
+- es6, es7或typescript转化为浏览器支持的javascript
+- react中将jsx转化为js
+参数
+- test: 一个用于loaders处理的文件的拓展名的正则表达式(必须)
+- loader: loader的名称(必须)
+- include/exclude: 手动添加必须要处理的文件夹(文件夹)或屏蔽不需要处理的文件  (可选)
+- query: 为loaders提供额外的设置选项 (选项)
+#### 5,babel
+- Babel的安装与配置
+```
+// npm一次性安装多个依赖模块，模块之间用空格隔开
+npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react
+```
+现在webpack的配置已经允许使用es6以及jsx的语法了
+
+不过这次测试用例会用到react,所以需要安装 React 和 React-DOM
+
+```
+npm install --save react react-dom
+```
+
+- Babel的配置
