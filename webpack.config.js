@@ -1,12 +1,9 @@
 const webpack = require('webpack');
-// const path = require('path');
 module.exports = {
     devtool: 'eval-source-map',
     entry: __dirname + '/src/main.js',
-    // entry: './src/index.js',
     output: {
         path: __dirname + '/dist',
-        // path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
     },
     devServer: {
@@ -17,7 +14,6 @@ module.exports = {
     },
     module: {
         rules: [
-            // { test: /.\css$/, loader: 'style-loader!css-loader'},
             {
                 test: /(\.jsx|\.js)$/,
                 use: {

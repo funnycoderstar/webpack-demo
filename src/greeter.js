@@ -1,4 +1,4 @@
-import React, { Component } from react;
+import React, { Component } from 'react';
 import config from './config.json';
 
 class Greeter extends Component {
