@@ -94,3 +94,64 @@ npm install --save react react-dom
 ```
 
 - Babel的配置
+
+> plugins(插件) ,有的是webpack自带的插件,有的是第三方插件
+####### 1,Hot Module Replacement
+在webpack中配置
+- 在webpack配置文件中配置HMR
+- 在 webpack dev server中配置参数'hot'
+####### 2,Babel中有个react-transform-hrm的插件,可以在不对webpack进行配置的情况下让HRM正常工作
+- 安装
+```
+npm install --save-dev babel-plugin-react-transform react-transform-hmr
+```
+- 配置Babel
+```
+// .babelrc
+{
+    "presets": [
+        "react", "es2015"
+    ],
+    "env": {
+        "development": {
+            "plugins": [
+                ["react-transform", {
+                    "transforms": [
+                        {
+                            "transform": "react-transform-hmr",
+                            "imports": ["react"],
+                            "locals": ["modules"]
+                        }
+                    ]
+                }]
+            ]
+        }
+    }
+}
+```
+- 现在使用react时就可以热加载模块了,每次保存都能看到浏览器上更新的功能
+
+> 产品阶段的构建
+目前我们已经使用webpack配置好了一个完整的开发环境,但是在产品阶段,可能还需要对打包的文件进行额外的处理,比如优化,压缩,缓存及分离css和js
+
+对于复杂的项目,我们需要复杂的配置,这时候最好分解配置文件为多个小文件,现在我们创建一个webpack.production.config.js的文件
+
+###### 1,优化插件
+
+- OccurentOrderPlugin: 为组件分配ID,webpack分析和考虑使用最多的模块,并为他们分配最小的ID
+- UgliyJsPlugin: 压缩js代码
+- ExtractTextPlugin:分离css和js文件
+
+OccurentOrderPlugin和UgliyJsPlugin都是内置插件,你需要做的只是安装其他非内置插件
+```
+npm install --save-dev extract-text-webpack-plugin
+```
+###### 2,缓存
+- 使用缓存的方法的最好的方法就是文件名与文件内容是匹配的(内容改变,文件名改变)
+- webpack可以把一个哈希值添加到打包的文件名中,添加特殊的字符串混合体([name], [id]and[hash])到输出文件名前
+```
+output: {
+    path: __dirname + '/build',
+    filename: 'bundle-[hash].js',
+},
+```
