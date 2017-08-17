@@ -11,6 +11,7 @@ module.exports = {
         historyApiFallback: true,//不跳转
         port: '2000',
         inline: true//实时刷新
+        hot: true
     },
     module: {
         rules: [
@@ -18,11 +19,6 @@ module.exports = {
                 test: /(\.jsx|\.js)$/,
                 use: {
                     loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            'es2015', 'react'
-                        ]
-                    }
                 },
                 exclude: /node_modules/,
             },
@@ -33,6 +29,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.BannerPlugin('webpackDemo')
+        new webpack.BannerPlugin('webpackDemo'),
+        new webpack.HotModuleReplacementPlugin() // 添加热加载插件
     ]
 }
