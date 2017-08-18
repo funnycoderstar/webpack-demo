@@ -1,9 +1,10 @@
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('Html-webpack-plugin');
 module.exports = {
     devtool: 'eval-source-map',
     entry: __dirname + '/src/main.js',
     output: {
-        path: __dirname + '/dist',
+        path: __dirname + '/build',
         filename: 'bundle.js',
     },
     devServer: {
@@ -18,21 +19,33 @@ module.exports = {
                 test: /(\.jsx|\.js)$/,
                 use: {
                     loader: 'babel-loader',
-                    options: {
-                        presets: [
-                            'es2015', 'react'
-                        ]
-                    }
                 },
                 exclude: /node_modules/,
             },
             {
                 test: /\.json$/,
                 loader: 'json-loader'
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: 'style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            module: true
+                        }
+                    }
+                ]
             }
         ]
     },
     plugins: [
-        new webpack.BannerPlugin('webpackDemo')
+        new webpack.BannerPlugin('webpackDemo'),
+        new HtmlWebpackPlugin({
+            template: __dirname + '/src/index.tmpl.html' // new 一个插件的实例，并传入相关的参数
+        })
     ]
 }

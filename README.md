@@ -11,7 +11,7 @@ mkdir src
 ##### 2,loader
 - webpack本身只能处理Javascript模块,如果要处理其他类型的模块,就需要使用loader进行转换
 - 如果我们需要在应用中添加css模块,就需要使用css-loader和style-loader
-- css-loader会遍历css文件,然后找到url()表达式然后处理他们
+- css-loader会遍历css文件,然后找到@import()和url()的方法实现require()的功能
 - style-loader会把原来的css代码插入页面的一个style标签中
 
 ```
@@ -94,3 +94,28 @@ npm install --save react react-dom
 ```
 
 - Babel的配置
+babel配置可以在webpack.config.js中配置，但是babel有很多配置项，因此把他单独放在'.babelrc'的配置文件中   
+
+#### 6，css及css模块化
+
+#### 7，css预处理器
+常用到的css处理loaders:
+- less loader
+- sass loader
+- stylus loader
+
+```
+npm install --save-dev postcss-loader autoprefixer
+```
+
+#### 8, 插件(plugins)
+- loaders用来处理打包过程中源文件的(jsx, less, scss..)
+- plugins在整个构建过程中生效
+使用某插件的方法，需要通过npm来安装，然后在webpack配置中的关键字plugins(是一个数组),后加上该插件的实例
+> HtmlWebapckPlugin
+- 依据一个简单的index.html模板，生成一个自动引用你打包后的js文件的新的index.html,这在每次生成的js文件名称不同时非常有用(比如添加了hash值)
+```
+npm install --save-dev html-webpack-plugin
+```
+> Hot Module Replacement
+- 允许你在修改组件代码后，自动刷新实现实时预览修改后的效果
